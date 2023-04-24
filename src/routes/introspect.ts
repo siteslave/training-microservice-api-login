@@ -15,7 +15,7 @@ export default async (fastify: FastifyInstance) => {
     onRequest: [fastify.authenticate]
   }, async (request: FastifyRequest, reply: FastifyReply) => {
     try {
-      const decoded: any = await request.jwtVerify();
+      const decoded: any = request.user;
       reply
         .status(200)
         .send(decoded);
