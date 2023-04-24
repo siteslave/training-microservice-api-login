@@ -73,6 +73,15 @@ app.register(require('./plugins/jwt'), {
   }
 })
 
+app.addHook('onSend', (_request: any, reply: any, _playload: any, done: any) => {
+  reply.headers({
+    'X-Server-Name': process.env.SERVER_NAME || 'dummy-server',
+  })
+
+  done()
+
+})
+
 // routes
 app.register(require("./routes/health_check"), { prefix: '/health-check' })
 app.register(require("./routes/login"), { prefix: '/login' })
