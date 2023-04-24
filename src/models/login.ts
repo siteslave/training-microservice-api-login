@@ -6,7 +6,7 @@ export class LoginModel {
 
   login(db: Knex, username: any, password: any) {
     return db('users')
-      .select('id', 'first_name', 'last_name')
+      .select('user_id', 'first_name', 'last_name')
       .where('username', username)
       .where('password', password)
       .first();

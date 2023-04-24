@@ -34,9 +34,7 @@ export default async (fastify: FastifyInstance) => {
       if (rs) {
         const user: any = rs
         const payload: any = {
-          userId: user.user_id,
-          firstName: user.first_name,
-          lastName: user.last_name
+          userId: user.user_id
         }
 
         const token = fastify.jwt.sign(payload)
@@ -46,7 +44,10 @@ export default async (fastify: FastifyInstance) => {
       }
     } catch (error: any) {
       console.error(error);
-      reply.status(500).send({ message: error.message })
+      reply.status(500).send({
+        message: "เกิดข้อผิดพลาด",
+        code: 5001
+      })
     }
   })
 

@@ -22,7 +22,7 @@ const app = fastify({
 // Plugins
 app.register(require('@fastify/formbody'))
 app.register(require('@fastify/cors'), {
-  origin: ['https://r7.moph.go.th'],
+  origin: ['r7.moph.go.th'],
   methods: ['GET', 'PUT', 'POST', 'DELETE'],
 })
 

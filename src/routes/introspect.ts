@@ -1,10 +1,8 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify"
 
-import introspectSchema from '../schema/introspect';
-
 export default async (fastify: FastifyInstance) => {
 
-  fastify.post('/introspect', {
+  fastify.get('/', {
     config: {
       rateLimit: {
         max: 10,
@@ -14,7 +12,7 @@ export default async (fastify: FastifyInstance) => {
         }
       }
     },
-    schema: introspectSchema,
+    onRequest: [fastify.authenticate]
   }, async (request: FastifyRequest, reply: FastifyReply) => {
     try {
       const decoded: any = await request.jwtVerify();
