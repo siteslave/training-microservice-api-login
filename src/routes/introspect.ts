@@ -7,8 +7,11 @@ export default async (fastify: FastifyInstance) => {
   fastify.post('/introspect', {
     config: {
       rateLimit: {
-        max: 1500,
-        timeWindow: '1 minute'
+        max: 10,
+        timeWindow: '1 minute',
+        keyGenerator: (request: any) => {
+          return request.headers['x-real-ip'];
+        }
       }
     },
     schema: introspectSchema,

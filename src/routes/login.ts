@@ -12,6 +12,15 @@ export default async (fastify: FastifyInstance) => {
   const db: Knex = fastify.db;
 
   fastify.post('/', {
+    config: {
+      rateLimit: {
+        max: 10,
+        timeWindow: '1 minute',
+        keyGenerator: (request: any) => {
+          return request.headers['x-real-ip'];
+        }
+      }
+    },
     schema: loginSchema,
   }, async (request: FastifyRequest, reply: FastifyReply) => {
     const body: any = request.body
